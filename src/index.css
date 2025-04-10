@@ -69,6 +69,10 @@ body {
   cursor: pointer;
 }
 
+.logo:hover {
+  opacity: 0.5;
+}
+
 /* FOOTER */
 .footer {
   background-color: #FFFFFF;
@@ -132,7 +136,6 @@ body {
   color: #FFA542
 }
 
-
 /* HEADER */
 header {
   margin-bottom: 20px;
@@ -150,7 +153,7 @@ header {
 .wish-basket {
   width: 60px;
   position: relative;
-
+  cursor: pointer;
 }
 
 .like:after{
@@ -163,6 +166,7 @@ header {
   top: -4px;
   right: 8px;
 }
+
 .wish-basket::after {
   width: 18px;
   height: 18px;
@@ -253,7 +257,7 @@ main {
 
 .item__rate:before {
   content: '';
-  background-image: url(../public/img/icons/rate-star.svg);
+  background-image: url(./img/icons/rate-star.svg);
   width: 24px;
   height: 22px;
   position: absolute;
@@ -284,7 +288,6 @@ main {
   justify-content: space-between;
   gap: 5px;
   flex-wrap: wrap;
-
 }
 
 .basket__title {
@@ -303,8 +306,6 @@ main {
   padding: 18px 18px 21px;
   margin-bottom: 13px;
   gap: 24px;
-  /* justify-content: space-between; */
-
 }
 
 .basket-item__image {
@@ -316,10 +317,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* align-content: center; */
   justify-content: space-between;
-  /* justify-items: center;
-  flex-wrap: wrap; */
 }
 
 .basket-item__sum {
@@ -341,7 +339,6 @@ main {
   border-radius: 50%;
   position: relative;
   cursor: pointer;
-
 }
 
 .basket-item__dec-btn::before {
@@ -351,8 +348,7 @@ main {
   position: absolute;
   left: 8px;
   top: 14px;
-  background-image: url(../public/img/icons/minus.svg);
-
+  background-image: url(./img/icons/minus.svg);
 }
 
 .basket-item__inc-btn::before {
@@ -362,8 +358,7 @@ main {
   position: absolute;
   left: 8px;
   top: 8px;
-  background-image: url(../public/img/icons/plus.svg);
-
+  background-image: url(./img/icons/plus.svg);
 }
 
 .basket-item__title {
@@ -396,6 +391,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.basket-item__delete {
+  cursor: pointer;
 }
 
 /* TOTAL_PRICE */
@@ -432,4 +430,9 @@ main {
   font-weight: 600;
   font-size: 17px;
   margin-top: 15px;
+  cursor: pointer;
+}
+.cart-total__submit:hover{
+  background-color: #FFCE7F;
+  color:#000000
 }

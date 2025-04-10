@@ -1,20 +1,31 @@
-import Basket from "./components/basket/basket.js";
-import Footer from "./components/footer/footer.tsx";
-import Header from "./components/header/header.tsx";
-import ItemList from "./components/item-list/item-list.js";
-import TotalPrice from "./components/total-price/total-price.js";
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { Fragment } from 'react';
+import { AppRoute } from './const.ts';
+
+import Main from './pages/main';
+import BasketPage from './pages/basket-page';
+import NotFound from './pages/not-found';
+
 
 function App() {
   return (
-    <div className="root"> 
-      <Header />
-      {/* <div className="basket-page">
-      <Basket />
-      <TotalPrice />
-      </div> */}
-      <ItemList />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+
+        <Route path={AppRoute.Main} element={<Main />} />
+
+        <Route path="*" element={
+          <Fragment>
+            <NotFound />
+            <Link to="/">Go to the main page</Link>
+          </Fragment>
+        }
+
+        />
+        <Route path={AppRoute.Basket} element={<BasketPage />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
