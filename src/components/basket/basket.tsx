@@ -1,8 +1,21 @@
+import { useState } from "react";
 import React from 'react'
 
 
 
 export default function Basket() {
+    const [quantity, setQuantity] = useState(1);
+
+    const pricePerItem = 2927;
+    const increment = () => setQuantity(prev => prev + 1);
+    const decrement = () => {
+        if (quantity > 1) {
+            setQuantity(prev => prev - 1);
+        }
+    };
+
+    const totalPrice = quantity * pricePerItem;
+
     return (
         <section role="region" aria-label="Потребительская корзина">
 
@@ -13,9 +26,9 @@ export default function Basket() {
                     <div className="basket-item__left-info">
                         <img className="basket-item__image" src='./img/id1.webp' alt="Apple BYZ S852I" width="220" height="237" />
                         <div className="basket-item__counter">
-                            <div className="basket-item__dec-btn"><span className="visually-hidden">-</span></div>
-                            <span className="basket-item__sum">1</span>
-                            <div className="basket-item__inc-btn"><span className="visually-hidden">+</span></div>
+                            <div onClick={decrement} className="basket-item__dec-btn"><span className="visually-hidden">-</span></div>
+                            <span className="basket-item__sum">{quantity}</span>
+                            <div onClick={increment} className="basket-item__inc-btn"><span className="visually-hidden">+</span></div>
                         </div>
 
                     </div>
@@ -24,7 +37,7 @@ export default function Basket() {
                         <h3 className="basket-item__title">
                             <a href="#">Apple BYZ S852I</a>
                         </h3>
-                        <p className="basket-item__price">2927 ₽</p>
+                        <p className="basket-item__price">{pricePerItem} ₽</p>
                     </div>
 
                     <div className="basket-item__right-info">
@@ -34,7 +47,7 @@ export default function Basket() {
                             </svg>
                             <span className="visually-hidden">Удалить</span>
                         </button>
-                        <p className="basket-item__total-price">2927 ₽</p>
+                        <p className="basket-item__total-price">{totalPrice} ₽</p>
                     </div>
 
                 </li>
@@ -42,8 +55,5 @@ export default function Basket() {
             </ul>
 
         </section>
-
-        
-
     )
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 export default function TotalPrice() {
     return (
         <section className="cart-total">

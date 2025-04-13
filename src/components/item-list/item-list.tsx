@@ -1,106 +1,71 @@
 import React from 'react'
+import { Items } from '../../types/item'
+import { useState } from 'react';
 
 
-export default function ItemList() {
+type ItemsListProps = {
+    items: Items;
+    onAddToBasket: (newCount: number) => void;
+}
+
+export default function ItemList({ items, onAddToBasket }: ItemsListProps) {
+
+    const [basketCount, setBasketCount] = useState(
+        () => Number(sessionStorage.getItem('basketCount')) || 0
+    );
+
+    const addToBasket = () => {
+        const newCount = basketCount + 1;
+        setBasketCount(newCount);
+        sessionStorage.setItem('basketCount', newCount.toString());
+        onAddToBasket(newCount);
+    }
+
+    const wiredItems = items.filter(item => !item.wireless);
+    const wirelessItems = items.filter(item => item.wireless);
+
     return (
         <main>
             <h2 className='item-list__title'>Наушники</h2>
             <ul className="item-list">
-                <li className="item">
-                    <div className="item__image">
-                        <img src='./img/id1.webp' alt="Apple BYZ S852I" width="220" height="237" />
-                    </div>
-                    <div className="item__top-info">
-                        <h3 className="item__title">
-                            <a href="#">Apple BYZ S852I</a>
-                        </h3>
-                        <p className="item__price">2927 ₽</p>
-                    </div>
-                    <div className="item__bottom-info">
-                        <span className="item__rate">4.7</span>
-                        <button className="item__btn">Купить</button>
-                    </div>
-                </li>
+                {wiredItems.map((item) => (
+                    <li className="item" key={item.id}>
+                        <div className="item__image">
+                            <img src={item.img} alt={item.title} width="220" height="237" />
+                        </div>
+                        <div className="item__top-info">
+                            <h3 className="item__title">
+                                <a href="#">{item.title}</a>
+                            </h3>
+                            <p className="item__price">{item.price} ₽</p>
+                        </div>
+                        <div className="item__bottom-info">
+                            <span className="item__rate">{item.rate}</span>
+                            <button className="item__btn" onClick={addToBasket}>Купить</button>
+                        </div>
+                    </li>
+                ))}
+            </ul>
 
-                <li className="item">
-                    <div className="item__image">
-                        <img src='./img/id2.webp' alt="Exployd EX-HP-1370" width="350" height="407" />
-                    </div>
-                    <div className="item__top-info">
-                        <h3 className="item__title">
-                            <a href="#">Exployd EX-HP-1370</a>
-                        </h3>
-                        <p className="item__price">70 ₽</p>
-                    </div>
-                    <div className="item__bottom-info">
-                        <span className="item__rate">4.5</span>
-                        <button className="item__btn">Купить</button>
-                    </div>
-                </li>
-
-                <li className="item">
-                    <div className="item__image">
-                        <img src='./img/id3.webp' alt="Smartbuy S4" width="350" height="407" />
-                    </div>
-                    <div className="item__top-info">
-                        <h3 className="item__title">
-                            <a href="#">Smartbuy S4</a>
-                        </h3>
-                        <p className="item__price">70 ₽</p>
-                    </div>
-                    <div className="item__bottom-info">
-                        <span className="item__rate">4.2</span>
-                        <button className="item__btn">Купить</button>
-                    </div>
-                </li>
-                <li className="item">
-                    <div className="item__image">
-                        <img src='./img/id1.webp' alt="Apple BYZ S852I" width="220" height="237" />
-                    </div>
-                    <div className="item__top-info">
-                        <h3 className="item__title">
-                            <a href="#">Apple BYZ S852I</a>
-                        </h3>
-                        <p className="item__price">2927 ₽</p>
-                    </div>
-                    <div className="item__bottom-info">
-                        <span className="item__rate">4.7</span>
-                        <button className="item__btn">Купить</button>
-                    </div>
-                </li>
-
-                <li className="item">
-                    <div className="item__image">
-                        <img src='./img/id2.webp' alt="Exployd EX-HP-1370" width="350" height="407" />
-                    </div>
-                    <div className="item__top-info">
-                        <h3 className="item__title">
-                            <a href="#">Exployd EX-HP-1370</a>
-                        </h3>
-                        <p className="item__price">70 ₽</p>
-                    </div>
-                    <div className="item__bottom-info">
-                        <span className="item__rate">4.5</span>
-                        <button className="item__btn">Купить</button>
-                    </div>
-                </li>
-
-                <li className="item">
-                    <div className="item__image">
-                        <img src='./img/id3.webp' alt="Smartbuy S4" width="350" height="407" />
-                    </div>
-                    <div className="item__top-info">
-                        <h3 className="item__title">
-                            <a href="#">Smartbuy S4</a>
-                        </h3>
-                        <p className="item__price">70 ₽</p>
-                    </div>
-                    <div className="item__bottom-info">
-                        <span className="item__rate">4.2</span>
-                        <button className="item__btn">Купить</button>
-                    </div>
-                </li>
-
+            <h2 className='item-list__title'>Беспроводные наушники</h2>
+            <ul className="item-list">
+                {wirelessItems.map((item) => (
+                    <li className="item" key={item.id}>
+                        <div className="item__image">
+                            <img src={item.img} alt={item.title} width="220" height="237" />
+                        </div>
+                        <div className="item__top-info">
+                            <h3 className="item__title">
+                                <a href="#">{item.title}</a>
+                            </h3>
+                            <p className="item__price">{item.price} ₽</p>
+                        </div>
+                        <div className="item__bottom-info">
+                            <span className="item__rate">{item.rate}</span>
+                            <button className="item__btn" onClick={addToBasket}>Купить</button>
+                        </div>
+                    </li>
+                ))}
             </ul>
         </main>
 
