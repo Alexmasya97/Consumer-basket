@@ -43,7 +43,7 @@ export const mockGoods: Items = [
   },
   {
     id: 6,
-    img: './img/id6.webp',
+    img: './img/id6.jpg',
     title: 'Rapoo VH350S',
     rate: 4.8,
     price: 4000,
