@@ -56,22 +56,30 @@ body {
   overflow: hidden;
 }
 
-.root {
+.not-found {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.container {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   width: 1110px;
   height: 100vh;
- }
+}
 
 .logo {
   font-weight: 700;
   font-size: 25px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .logo:hover {
   opacity: 0.5;
+  transform: scale(1.2);
 }
 
 /* FOOTER */
@@ -83,7 +91,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  width: 1052px; 
+  width: 1052px;
 }
 
 .nav__ul {
@@ -153,9 +161,15 @@ header {
   width: 60px;
   position: relative;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.like:after{
+.like:hover,
+.wish-basket:hover {
+  transform: scale(1.2)
+}
+
+.like:after {
   width: 18px;
   height: 18px;
   background-color: #FFCE7F;
@@ -199,6 +213,11 @@ header {
 
 /* MAIN */
 
+.main {
+  flex-grow: 1;
+  position: relative;
+}
+
 .item-list {
   display: flex;
   flex-wrap: wrap;
@@ -207,7 +226,7 @@ header {
   margin: 0 auto;
 }
 
-.item-list__title{
+.item-list__title {
   margin-top: 29px;
 }
 
@@ -223,6 +242,12 @@ header {
   flex-direction: column;
   margin-top: 20px;
 
+}
+
+.item:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
 .item__image {
@@ -247,6 +272,18 @@ header {
 .item__price {
   color: #FFA542;
   font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+
+.item__old-price {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  text-decoration-line: line-through;
+  color: rgb(255, 206, 127);
+  margin-left: 8px;
+
 }
 
 .item__rate {
@@ -272,6 +309,10 @@ header {
   cursor: pointer;
 }
 
+.item__btn:hover {
+  opacity: 0.5;
+}
+
 .item__top-info {
   display: flex;
   justify-content: space-between;
@@ -284,12 +325,24 @@ header {
 }
 
 /* BASKET */
+
+.add-to-basket {
+  margin-top: 30vh;
+  margin-left: 50vb;
+}
+
+.add-to-basket:hover {
+  cursor: pointer;
+  opacity: 0.5;
+
+
+}
+
 .basket-page {
   display: flex;
   justify-content: space-between;
   gap: 5px;
   flex-wrap: wrap;
-  flex-grow: 1;
 }
 
 .basket__title {
@@ -394,6 +447,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .basket-item__delete {
   cursor: pointer;
 }
@@ -434,7 +488,8 @@ header {
   margin-top: 15px;
   cursor: pointer;
 }
-.cart-total__submit:hover{
+
+.cart-total__submit:hover {
   background-color: #FFCE7F;
-  color:#000000
+  color: #000000
 }

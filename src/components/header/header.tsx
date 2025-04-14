@@ -3,12 +3,7 @@ import Logo from '../logo/logo'
 import { Link } from 'react-router-dom'
 import ButtonBasket from '../btn-basket/btn-basket';
 
-interface HeaderProps {
-    basketCount: number;
-    setBasketCount: React.Dispatch<React.SetStateAction<number>>;
-}
-
-export default function Header({ basketCount, setBasketCount }: HeaderProps) {
+export default function Header() {
 
     return (
         <header>
@@ -28,7 +23,7 @@ export default function Header({ basketCount, setBasketCount }: HeaderProps) {
 
                 <Link to="/basket-page">
 
-                    <ButtonBasket count={basketCount} />
+                    <ButtonBasket />
 
                 </Link>
             </div>
