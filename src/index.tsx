@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { mockGoods } from './mocks/items';
-
+import { CartProvider } from "react-use-cart";
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>
-    <App items = {mockGoods}/>
+    <CartProvider>
+      <App />
+    </CartProvider>
   </React.StrictMode>
 );

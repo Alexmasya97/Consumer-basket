@@ -1,50 +1,38 @@
-
-import React, { useEffect, useState } from 'react';
-import Header from '../components/header/header'
-import Footer from '../components/footer/footer'
-import Basket from '../components/basket/basket'
-import TotalPrice from '../components/total-price/total-price'
-
-
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useCart } from "react-use-cart";
+import BasketCard from '../components/basket-card/basket-card';
+import { Item } from '../types/item';
 
 export default function BasketPage() {
-    const [basketCount, setBasketCount] = useState(() => {
-        const savedCount = sessionStorage.getItem('basketCount');
-        return savedCount ? Number(savedCount) : 0;
-    });
+    const { isEmpty, items, cartTotal } = useCart();
 
-    const handleAddToBasket = () => {
-        setBasketCount(prevCount => {
-            const newCount = prevCount + 1;
-            sessionStorage.setItem('basketCount', String(newCount));
-            return newCount;
-        });
-    };
+    const cartItems: Item[] = items as Item[];
 
-    useEffect(() => {
+    if (isEmpty) return <h2 className='add-to-basket'><Link to="/">Добавьте товары в корзину</Link></h2>;
 
-        const handleStorageChange = () => {
-            const savedCount = sessionStorage.getItem('basketCount');
-            if (savedCount) {
-                setBasketCount(Number(savedCount));
-            }
-        };
-
-        window.addEventListener('storage', handleStorageChange);
-
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, []);
     return (
-        <main className="root">
-            <Header basketCount={basketCount} setBasketCount={setBasketCount} />
-            <div className="basket-page">
-                <Basket />
-                <TotalPrice />
+        <div className="basket">
+            <h2 className="basket__title">Корзина</h2>
+            <div className='basket-page'>
+                <ul className="basket__list">
+                    {
+                        cartItems.map(item => (
+                            <BasketCard key={item.id} product={item} />
+                        ))
+                    }
+                </ul>
+                {
+                    !isEmpty &&
+                    <div className="cart-total">
+                        <div className="cart-total__info">
+                            <h2 className="cart-total__title">Итого</h2>
+                            <div className="cart-total__sum">₽ {cartTotal} </div>
+                        </div>
+                        <button type="submit" className="cart-total__submit">Перейти к оформлению</button>
+                    </div>
+                }
             </div>
-            <Footer />
-        </main>
-
-    )
+        </div>
+    );
 }

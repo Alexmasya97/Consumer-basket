@@ -5,31 +5,25 @@ import { AppRoute } from './const';
 import Main from './pages/main';
 import BasketPage from './pages/basket-page';
 import NotFound from './pages/not-found';
-import { Items } from './types/item';
+import Layout from './components/layout/layout';
 
-type AppProps = {
-  items: Items;
-}
 
-function App({ items }: AppProps) {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
-
-        <Route path={AppRoute.Main} element={<Main items={items} />} />
-
-        <Route path="*" element={
-          <Fragment>
-            <NotFound />
-            <Link to="/">Go to the main page</Link>
-          </Fragment>
-        }
-
-        />
-        <Route path={AppRoute.Basket} element={<BasketPage />}
-        />
+        <Route path={AppRoute.Main} element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path={AppRoute.Basket} element={<BasketPage />} />
+          <Route path="*" element={
+            <Fragment>
+              <NotFound />
+              {/* <Link to="/">Go to the main page</Link> */}
+            </Fragment>
+          } />
+        </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 

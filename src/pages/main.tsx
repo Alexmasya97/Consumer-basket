@@ -1,34 +1,28 @@
 import React from 'react';
-import Header from '../components/header/header';
-import Footer from '../components/footer/footer';
-import ItemList from '../components/item-list/item-list';
-import { Items } from '../types/item';
-import { useState } from 'react';
+import Item from '../components/item/item';
+import { mockGoods } from '../mocks/items';
 
 
-type ItemsListProps = {
-    items: Items;
-}
+export default function Main() {
 
-
-export default function Main({ items }: ItemsListProps) {
-  const [basketCount, setBasketCount] = useState(0);
-
-  const handleAddToBasket = () => {
-    setBasketCount(prevCount => {
-        const newCount = prevCount + 1;
-        sessionStorage.setItem('basketCount', String(newCount));
-        return newCount;
-    });
-};
+  const wiredItems = mockGoods.filter(item => !item.wireless);
+  const wirelessItems = mockGoods.filter(item => item.wireless);
 
   return (
-    <main className="root"> 
-      <Header basketCount={basketCount} setBasketCount={setBasketCount}/>
-      <ItemList 
-      items={items}
-      onAddToBasket={handleAddToBasket}
-      />
-      <Footer />
-    </main>
-  );}
+    <section className='main'>
+      <div>
+        <h2 className='item-list__title'>Наушники</h2>
+        <ul className="item-list">
+          <Item items={wiredItems} />
+        </ul>
+      </div>
+
+      <div>
+        <h2 className='item-list__title'>Беспроводные наушники</h2>
+        <ul className="item-list">
+          <Item items={wirelessItems} />
+        </ul>
+      </div>
+    </section>
+  );
+}
